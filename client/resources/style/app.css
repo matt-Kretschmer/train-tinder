@@ -1,0 +1,19 @@
+/* global styling rules */
+:root{
+    --primary: #2B3A55;
+    --secondary: #CE7777;
+    --accent: #F2E5E5;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background-color: var(--primary);
+}
+
+.bg-accent{
+    background-color: var(--accent);
+}
