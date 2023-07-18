@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.train.tinder.model.Train;
 import com.train.tinder.service.TrainService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -20,7 +21,8 @@ public class TrainController {
     private final TrainService trainService;
 
     @GetMapping
-    public ResponseEntity<List<Train>> all(){
+    @Operation(summary = "Get all trains.", description = "A list of all single trains.")
+    public ResponseEntity<List<Train>> all() {
         return new ResponseEntity<>(trainService.findAll(), HttpStatus.OK);
     }
 }
