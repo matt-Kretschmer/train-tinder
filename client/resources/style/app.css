@@ -3,6 +3,10 @@
     --primary: #2B3A55;
     --secondary: #CE7777;
     --accent: #F2E5E5;
+
+    --small: 0.5em;
+    --medium: 1em;
+    --large: 1.5em;
 }
 
 *{
@@ -16,4 +20,46 @@ body{
 
 .bg-accent{
     background-color: var(--accent);
+}
+
+.main-header{
+    margin-left: auto; margin-right:auto;
+    width: fit-content; 
+    color: #FF0404; 
+    border-bottom: #FF0404 double 0.5em; 
+    border-radius: 1em;
+    font-size: 5em;
+    margin-bottom: var(--medium);
+}
+
+.main-header h1{
+    display: inline;
+}
+
+.accent-button{
+    background-color: #CE7777; 
+    color: #F2E5E5; 
+    padding: 0.7em; 
+    font-size: 2em; 
+    border-radius: 32px;
+}
+
+.sub-header{
+    font-size: 3em; 
+    color: #F2E5E5;
+    margin-bottom: var(--small)
+}
+
+.main-section{
+    height: 100%; 
+    width: 70%;
+}
+
+.info-section{
+    height: 100%; 
+    width: 30%;
+}
+
+.mb-sm{
+    margin-top: 1em 
 }
