@@ -38,7 +38,6 @@ body{
 
 .accent-button{
     background-color: #CE7777; 
-    color: #F2E5E5; 
     padding: 0.7em; 
     font-size: 2em; 
     border-radius: 32px;
@@ -46,8 +45,11 @@ body{
 
 .sub-header{
     font-size: 3em; 
-    color: #F2E5E5;
     margin-bottom: var(--small)
+}
+
+.secondary-text{
+    color: #F2E5E5;
 }
 
 .main-section{
@@ -61,5 +63,11 @@ body{
 }
 
 .mb-sm{
-    margin-top: 1em 
+    margin-bottom: var(--small) 
+}
+.mb-md{
+    margin-bottom: var(--medium) 
+}
+.mb-lg{
+    margin-bottom: var(--large) 
 }
