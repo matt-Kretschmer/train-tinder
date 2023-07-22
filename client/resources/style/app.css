@@ -71,3 +71,68 @@ body{
 .mb-lg{
     margin-bottom: var(--large) 
 }
+
+#train-main {
+  display: grid;
+
+  grid-template-columns: 2fr 1fr;
+
+  grid-template-rows: auto;
+  font-family: "Inter", monospace;
+
+}
+
+#train-main h2 {
+  text-align: center;
+}
+#train-main h3 {
+  text-decoration: underline;
+  font-size: 2rem;
+  font-weight: 700;
+
+  padding-top: 2rem;
+}
+.train-profile h1 {
+  text-align: center;
+  color: red;
+  font-size: 5em;
+}
+.train-profile img {
+  margin: 0 auto;
+  display: block;
+}
+.train-profile button {
+  height: 9rem;
+  width: 9rem;
+  margin-top: var(--large);
+  border-radius: 32px;
+  background-color: var(--accent);
+}
+
+.train-profile button:hover {
+  background-color: #f2e5e5c3;
+}
+.description {
+  background-color: var(--accent);
+  min-height: 100vh;
+  padding: 7rem 1.5rem;
+ 
+}
+
+.train-profile {
+  text-align: center;
+}
+
+
+@media (max-width: 700px) {
+  #train-main {
+    display: grid;
+  
+    grid-template-columns: 1fr;
+  
+  }
+  .train-profile {
+    margin-bottom:var(--large);
+  }
+  
+}
