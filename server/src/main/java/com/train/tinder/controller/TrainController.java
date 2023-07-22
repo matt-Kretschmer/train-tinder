@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.train.tinder.model.Train;
+import com.train.tinder.model.TrainDetail;
 import com.train.tinder.service.TrainService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,9 +20,9 @@ import lombok.RequiredArgsConstructor;
 public class TrainController {
     private final TrainService trainService;
 
-    @GetMapping
-    @Operation(summary = "Get all trains.", description = "A list of all single trains.")
-    public ResponseEntity<List<Train>> all() {
-        return new ResponseEntity<>(trainService.findAll(), HttpStatus.OK);
+    @GetMapping("/details")
+    @Operation(summary = "Get all trains detials.", description = "A list of all train details.")
+    public ResponseEntity<List<TrainDetail>> all() {
+        return new ResponseEntity<>(trainService.findAllTrainDetails(), HttpStatus.OK);
     }
 }
