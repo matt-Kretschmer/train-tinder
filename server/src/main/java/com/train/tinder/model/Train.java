@@ -1,8 +1,11 @@
 package com.train.tinder.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,11 +14,21 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
+@Table(name = "trains")
 public class Train {
-    private @Id @GeneratedValue Long id;
-    private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "train_id")
+    private Integer trianId;
 
-    public Train(String name){
-        this.name = name;
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    @Column(name = "train_details_id")
+    private Integer trainDetailsId;
+
+    public Train(String imageUrl, Integer trainDetailsId) {
+        this.imageUrl = imageUrl;
+        this.trainDetailsId = trainDetailsId;
     }
 }
