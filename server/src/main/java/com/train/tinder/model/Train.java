@@ -21,14 +21,10 @@ public class Train {
     @Column(name = "train_id")
     private Integer trianId;
 
-    @Column(name = "image_url")
-    private String imageUrl;
-
     @Column(name = "train_details_id")
     private Integer trainDetailsId;
 
-    public Train(String imageUrl, Integer trainDetailsId) {
-        this.imageUrl = imageUrl;
+    public Train(Integer trainDetailsId) {
         this.trainDetailsId = trainDetailsId;
     }
 }
