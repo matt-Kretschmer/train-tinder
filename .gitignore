@@ -1,0 +1,13 @@
+# NPM stuff
+node_modules/
+
+# Maven stuff
+target/
+
+# Editors
+vscode/
+.vscode/
+.idea/
+
+# credentials
+.env
