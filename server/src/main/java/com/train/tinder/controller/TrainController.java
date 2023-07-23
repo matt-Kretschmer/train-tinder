@@ -15,11 +15,13 @@ import com.train.tinder.model.TrainDetail;
 import com.train.tinder.service.TrainService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/trains")
+@SecurityRequirement(name = "bearerAuth")
 public class TrainController {
     private final TrainService trainService;
 
