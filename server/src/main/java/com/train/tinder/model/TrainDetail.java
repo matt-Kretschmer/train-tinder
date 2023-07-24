@@ -33,11 +33,15 @@ public class TrainDetail {
     @Column(name = "name")
     private String name;
 
-    public TrainDetail(String about, String likes, String dislikes, String name) {
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    public TrainDetail(String about, String likes, String dislikes, String name, String imageUrl) {
         this.about = about;
         this.likes = likes;
         this.dislikes = dislikes;
         this.name = name;
+        this.imageUrl = imageUrl;
     }
 
 }
