@@ -22,6 +22,10 @@ body{
     background-color: var(--accent);
 }
 
+.clickable{
+    cursor: pointer;
+}
+
 .main-header{
     margin-left: auto; margin-right:auto;
     width: fit-content; 
