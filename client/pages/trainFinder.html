@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      charset="UTF-8"
+      lang="en"
+    />
     <title>Train Tinder</title>
     <link rel="stylesheet" href="../resources/style/app.css" />
     <link
@@ -13,10 +18,14 @@
   <body>
     <main id="train-main">
       <section class="train-profile">
-        <h1>TRAINS IN YOUR AREA</h1>
-        <img src="https://picsum.photos/500" />
+        <section class="backSection">
+          <a id="back">BACK</a>
+          <h1>TRAINS IN YOUR AREA</h1>
+        </section>
+
+        <img id="train" />
         <button><i class="fa fa-times" style="font-size: 56px"></i></button>
-        <button>
+        <button id="likeButton">
           <i class="fa fa-heart" style="font-size: 56px; color: #ce7777"></i>
         </button>
       </section>

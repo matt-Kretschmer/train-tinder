@@ -1,39 +1,84 @@
-const dummyData = [
-  {
-    name: "thomas",
-    about:
-      " Hi, i’m thomas, its lonely being the dankest engine in town. Why don’t we grab a smoke together and see where things can chug along, choo choo.",
-    likes: "Raves and premium oil",
-    dislikes: "Environmentalists, and non train enjoyers",
-  },
-  {
-    name: "bob",
-    about:
-      "don’t we grab a smoke together and see where things can chug along, choo choo.",
-    likes: "Raves and premium oil",
-    dislikes: "Environmentalists, and non train enjoyers",
-  },
-  {
-    name: "mary",
-    about:
-      " Hi, i’m thomas, its lonely being the dankest engine in town. Why don’t we grab a smoke together and see where things can chug along, choo choo.",
-    likes: "Raves and premium oil",
-    dislikes: "Environmentalists, and non train enjoyers",
-  },
-  {
-    name: "adam",
-    about:
-      " Hi, i’m thomas, its lonely being the dankest engine in town. Why don’t we grab a smoke together and see where things can chug along, choo choo.",
-    likes: "Raves and premium oil",
-    dislikes: "Environmentalists, and non train enjoyers",
-  },
-]; //temporary
+const jwtToken = localStorage.getItem("jwt");
+let data, trainSelected;
+let likedTrains = [];
+
+async function getTrainDetails() {
+  likedTrains = await getUserLikedTrains();
+
+  try {
+    const result = await fetch(
+      "https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains/details",
+      {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      }
+    );
+    data = await result.json();
+    let availableTrains = data.filter(
+      (allTrains) =>
+        !likedTrains.some((userTrains) => allTrains.name === userTrains.name)
+    );
+    if (availableTrains.length !== 0) {
+      const randomIndex = Math.floor(Math.random() * availableTrains.length);
+      trainSelected = availableTrains[randomIndex];
+
+      document.querySelector("#train").src = trainSelected["imageUrl"];
+
+      for (const x in trainSelected) {
+        if (x != "trianDetailsId") {
+          const element = document.getElementById(x);
+          if (element) {
+            element.textContent = trainSelected[x];
+          }
+        }
+      }
+    } else {
+      alert("no trains"); //to redirect to page maybe
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function getUserLikedTrains() {
+  try {
+    const result = await fetch(
+      "https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains/likes",
+      {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      }
+    );
+    return await result.json();
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const randomIndex = Math.floor(Math.random() * dummyData.length);
-  const data = dummyData[randomIndex];
+  await getTrainDetails();
+});
 
-  for (const x in data) {
-    document.getElementById(x).textContent = data[x];
+document.querySelector("#likeButton").addEventListener("click", async () => {
+  try {
+    const result = await fetch(
+      "https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains",
+      {
+        method: "POST",
+        headers: { Authorization: `Bearer ${jwtToken}` },
+        body: JSON.stringify({
+          trainDetailsId: 0,
+          matched: true,
+        }),
+      }
+    );
+
+    await getTrainDetails();
+  } catch (error) {
+    console.error(error);
   }
 });
