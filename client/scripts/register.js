@@ -7,6 +7,8 @@ const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 function registerUser(event) {
     event.preventDefault();
+    // togglePopup()
+
     try{
 
         const username = document.getElementById('username').value;
@@ -27,7 +29,8 @@ function registerUser(event) {
         }else{
 
             console.log('User registered successfully. Confirmation email sent:', result.user);
-            togglePopup()
+            document.getElementById('registerUserForm').style.display = 'none';
+            document.getElementById('confirmRegister').style.display = 'flex';
         }
         // You can redirect the user to a confirmation page or perform other actions here.
         });
@@ -42,5 +45,32 @@ function togglePopup() {
 }
 
 function authorizeUser(event){
+
     event.preventDefault();
+    const username = document.getElementById('username').value;
+    const authCode = document.getElementById('auth-code').value;
+
+    const userData = {
+        Username: username,
+        Pool: userPool,
+    };
+      
+    const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+    cognitoUser.confirmRegistration(authCode, true, (err, result) => {
+        if (err) {
+          console.log('Confirmation error:', err.message || JSON.stringify(err));
+        } else {
+            togglePopup()
+        //   go to login
+        }
+    });
+
+    console.log(username)
+
+    // proceed to login
+
+}
+
+function navToLogin(){
+    window.location.href = "login.html"
 }
