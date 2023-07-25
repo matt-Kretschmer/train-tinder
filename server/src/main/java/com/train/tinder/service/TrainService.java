@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 import com.train.tinder.model.SaveTrainDTO;
 import com.train.tinder.model.Train;
 import com.train.tinder.model.TrainDetail;
+import com.train.tinder.model.UserLikedTrain;
+import com.train.tinder.model.UserTrain;
 import com.train.tinder.repository.TrainDetailRepository;
 import com.train.tinder.repository.TrainRepository;
+import com.train.tinder.repository.UserTrainRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,14 +25,20 @@ public class TrainService {
 
     private final TrainDetailRepository trainDetailRepository;
     private final TrainRepository trainRepository;
+    private final UserTrainRepository userTrainRepository;
+
+    public SaveTrainDTO saveUserLikedTrain(String userId, SaveTrainDTO userLikedTrain) {
+        Train train = trainRepository.save(new Train(userLikedTrain.getTrainDetailsId()));
+        userTrainRepository.save(new UserTrain(userId, train.getTrianId(), userLikedTrain.getMatched()));
+        return modelMapper.map(train, SaveTrainDTO.class);
+    }
 
     public List<TrainDetail> findAllTrainDetails() {
         return trainDetailRepository.findAll();
     }
 
-    public SaveTrainDTO saveUserLikedTrain(SaveTrainDTO userLikedTrain) {
-        Train train = trainRepository.save(new Train(userLikedTrain.getImageUrl(), userLikedTrain.getTrainDetailsId()));
-        // Need to populate the user_trains table to reflect a user did like a train.
-        return modelMapper.map(train, SaveTrainDTO.class);
+    public List<UserLikedTrain> findAllTrainsLikedByUser(String userId) {
+        return userTrainRepository.findAllTrainsLikedByUser(userId);
     }
+
 }

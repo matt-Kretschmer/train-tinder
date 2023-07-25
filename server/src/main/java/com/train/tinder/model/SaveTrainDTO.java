@@ -10,6 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SaveTrainDTO {
-    private String imageUrl;
     private Integer trainDetailsId;
+    private Boolean matched;
 }

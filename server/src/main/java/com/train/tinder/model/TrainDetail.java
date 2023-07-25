@@ -1,11 +1,11 @@
 package com.train.tinder.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,11 +33,15 @@ public class TrainDetail {
     @Column(name = "name")
     private String name;
 
-    public TrainDetail(String about, String likes, String dislikes, String name) {
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    public TrainDetail(String about, String likes, String dislikes, String name, String imageUrl) {
         this.about = about;
         this.likes = likes;
         this.dislikes = dislikes;
         this.name = name;
+        this.imageUrl = imageUrl;
     }
 
 }

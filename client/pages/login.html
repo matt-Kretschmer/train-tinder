@@ -1,5 +1,13 @@
 <head>
     <link rel="stylesheet" href="../resources/style/app.css"/>
+
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.933.0.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/amazon-cognito-identity-js@6.3.1/dist/amazon-cognito-identity.min.js"></script>
+    
+    <script src="../scripts/login.js"></script>
+   
+    <title>Login</title>
 </head>
 <body class="primary-bg">
     <main style="display: flex; width: 100%; height: 100%;">
@@ -9,18 +17,29 @@
             </header>
             <h2 class="sub-header secondary-text" style="display: flex; justify-content: center;">Login with socials</h2>
             <form style="display: flex; justify-content: space-around;">
-                <input type="button" class="accent-button secondary-text" value="Login with Google"/>
+                <input type="button" class="accent-button secondary-text clickable" value="Login with Google"/>
             </form>
             <h2 class="sub-header secondary-text" style="display: flex; justify-content: center; margin-top: 0.5em;">OR</h2>
-            <form style="
+            <form onsubmit="loginUser(event)" id="loginForm"
+             style="
                 display: flex; 
                 flex-direction: column; 
                 align-items: center; 
                 gap: 0.5em;"
             >
-                <input type="text" style="font-size: 1.5em;" placeholder="username"/>
-                <input type="password" style="font-size: 1.5em;" placeholder="password"/>
-                <input type="submit" class="accent-button secondary-text" value="Login" style="margin-top: 1em;"/>
+                <input required type="text" style="font-size: 1.5em;" placeholder="username/e-mail" id="username"/>
+                <input required type="password" style="font-size: 1.5em;" placeholder="password" id="password"/>
+                <input type="submit" class="accent-button secondary-text clickable" value="Login" style="margin-top: 1em;"/>
+            </form>
+            <form id="confirmRegister" onsubmit="authorizeUser(event)" style="
+                display: none; 
+                flex-direction: column; 
+                align-items: center; 
+                gap: 0.5em;"
+            >
+                <input required type="auth-code" style="font-size: 1.5em;" id="auth-code" placeholder="Authorization Code"/>
+                <label for="auth-code" class="secondary-text">Please check your inbox for an authorization code</label>
+                <input type="submit" class="accent-button secondary-text"  value="Authorize" style="margin-top: 1em;"/>
             </form>
             <!-- login -->
         </section>
@@ -31,7 +50,7 @@
                 <p style="font-size: 1.5em">Sign up below and find a train for you</p>
             </article>
             <form style="display: flex; justify-content: space-around;">
-                <input type="button" class="accent-button secondary-text" value="Sign up"/>
+                <input type="button" class="accent-button secondary-text" value="Sign up" onclick="navToRegister()"/>
             </form>
         </section>
     </main>
