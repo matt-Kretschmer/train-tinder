@@ -6,15 +6,12 @@ async function getTrainDetails() {
   likedTrains = await getUserLikedTrains();
 
   try {
-    const result = await fetch(
-      "https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains/details",
-      {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      }
-    );
+    const result = await fetch("https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains/details", {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    });
     data = await result.json();
     let availableTrains = data.filter(
       (allTrains) =>
@@ -44,41 +41,46 @@ async function getTrainDetails() {
 
 async function getUserLikedTrains() {
   try {
-    const result = await fetch(
-      "https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains/likes",
-      {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      }
-    );
+    const result = await fetch("https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains/likes", {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    });
     return await result.json();
   } catch (error) {
     console.error(error);
   }
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-  await getTrainDetails();
-});
-
-document.querySelector("#likeButton").addEventListener("click", async () => {
+async function postTrainData(matched) {
   try {
-    const result = await fetch(
-      "https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains",
-      {
-        method: "POST",
-        headers: { Authorization: `Bearer ${jwtToken}` },
-        body: JSON.stringify({
-          trainDetailsId: 0,
-          matched: true,
-        }),
-      }
-    );
+    const response = await fetch("https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${jwtToken}` },
+      body: JSON.stringify({
+        trianDetailsId: trainSelected["trianDetailsId"],
+        matched: matched,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed response");
+    }
 
     await getTrainDetails();
   } catch (error) {
     console.error(error);
   }
+}
+document.addEventListener("DOMContentLoaded", async () => {
+  await getTrainDetails();
+});
+
+document.querySelector("#likeButton").addEventListener("click", async () => {
+  postTrainData(true);
+});
+
+document.querySelector("#dislikeButton").addEventListener("click", async () => {
+  postTrainData(false);
 });
