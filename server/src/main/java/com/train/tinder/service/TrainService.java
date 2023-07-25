@@ -29,7 +29,7 @@ public class TrainService {
 
     public SaveTrainDTO saveUserLikedTrain(String userId, SaveTrainDTO userLikedTrain) {
         Train train = trainRepository.save(new Train(userLikedTrain.getTrainDetailsId()));
-        userTrainRepository.save(new UserTrain(userId, train.getTrianId(), true));
+        userTrainRepository.save(new UserTrain(userId, train.getTrianId(), userLikedTrain.getMatched()));
         return modelMapper.map(train, SaveTrainDTO.class);
     }
 

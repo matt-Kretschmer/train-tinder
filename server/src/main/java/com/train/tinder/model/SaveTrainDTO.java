@@ -11,4 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class SaveTrainDTO {
     private Integer trainDetailsId;
+    private Boolean matched;
 }
