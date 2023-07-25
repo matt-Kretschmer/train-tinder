@@ -26,12 +26,40 @@ const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
     cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function (session) {
         console.log('User logged in successfully. Access Token:', session.getAccessToken().getJwtToken());
-        // You can redirect the user to a dashboard or another page upon successful login.
-        localStorage.setItem('jwt',session.getAccessToken().getJwtToken() )
+        localStorage.setItem('jwt',session.getAccessToken().getJwtToken())
         },
         onFailure: function (err) {
         console.error('Error logging in:', err.message || JSON.stringify(err));
-        // Handle login failure, e.g., display an error message on the login form.
         },
     });
+}
+
+function authorizeUser(event){
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const authCode = document.getElementById('auth-code').value;
+
+    const userData = {
+        Username: username,
+        Pool: userPool,
+    };
+      
+    const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+    cognitoUser.confirmRegistration(authCode, true, (err, result) => {
+        if (err) {
+          console.log('Confirmation error:', err.message || JSON.stringify(err));
+        } else {
+            navToHome();
+        }
+    });
+
+    console.log(username)
+}
+
+function navToHome(){
+    window.location.href = "register.html"
+}
+
+function navToRegister(){
+    window.location.href = "register.html"
 }

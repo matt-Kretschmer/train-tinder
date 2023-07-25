@@ -21,27 +21,36 @@
                 <input type="button" class="accent-button secondary-text" value="Sign up with Google"/>
             </form>
             <h2 class="sub-header secondary-text" style="display: flex; justify-content: center; margin-top: 0.5em;">OR</h2>
-            <form onsubmit="registerUser(event)" style="
+            <form id="registerUserForm" onsubmit="registerUser(event)" style="
                 display: flex; 
                 flex-direction: column; 
                 align-items: center; 
                 gap: 0.5em;"
             >
-                <input type="text" style="font-size: 1.5em;" id="username" placeholder="username"/>
-                <input type="email" style="font-size: 1.5em;" id="email" placeholder="email"/>
-                <input type="password" style="font-size: 1.5em;" id="password" placeholder="password"/>
+                <input required type="text" style="font-size: 1.5em;" id="username" placeholder="username"/>
+                <input required type="email" style="font-size: 1.5em;" id="email" placeholder="email"/>
+                <input required type="password" style="font-size: 1.5em;" id="password" placeholder="password"/>
                 <input type="submit" class="accent-button secondary-text"  value="Sign up" style="margin-top: 1em;"/>
             </form>
-            <!-- login -->
+            <form id="confirmRegister" onsubmit="authorizeUser(event)" style="
+                display: none; 
+                flex-direction: column; 
+                align-items: center; 
+                gap: 0.5em;"
+                
+            >
+                <input required type="auth-code" style="font-size: 1.5em;" id="auth-code" placeholder="Authorization Code"/>
+                <label for="auth-code" class="secondary-text">Please check your inbox for an authorization code</label>
+                <input type="submit" class="accent-button secondary-text"  value="Authorize" style="margin-top: 1em;"/>
+            </form>
         </section>
         <section class="bg-accent info-section" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2em;">
-            <!-- informatino -->
             <h2 class="sub-header" style="display: flex; justify-content: center;">Have an account?</h2>
             <article class="mb-lg">
                 <p style="font-size: 1.5em">Login below and find a train for you</p>
             </article>
             <form style="display: flex; justify-content: space-around;">
-                <input type="button" class="accent-button secondary-text" value="Login"/>
+                <input type="button" class="accent-button secondary-text" value="Login" onclick="navToLogin()"/>
             </form>
         </section>
 
@@ -49,12 +58,8 @@
         <div class="overlay" id="popupOverlay">
             <!-- Popup container -->
             <div class="popup">
-            <span class="close" onclick="togglePopup()">X</span>
-            <h2>Authorization Code</h2>
-            <form onsubmit="authorizeUser(event)">
-                <input type="text" placeholder="Enter code" />
-                <button type="submit">Submit</button>
-            </form>
+            <h2>Success!</h2>
+            <input onclick="navToLogin()" type="button" class="accent-button secondary-text" value="Go To login"/>
             </div>
         </div>
     </main>
