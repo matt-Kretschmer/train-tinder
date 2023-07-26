@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      charset="UTF-8"
+      lang="en"
+    />
     <title>Train Tinder</title>
     <link rel="stylesheet" href="../resources/style/app.css" />
     <link
@@ -9,14 +14,24 @@
       rel="stylesheet"
       type="text/css"
     />
+    <script
+    type="text/javascript"
+    src="../scripts/trainFinder.js"
+  ></script>
   </head>
   <body>
     <main id="train-main">
       <section class="train-profile">
-        <h1>TRAINS IN YOUR AREA</h1>
-        <img src="https://picsum.photos/500" />
-        <button><i class="fa fa-times" style="font-size: 56px"></i></button>
-        <button>
+        <section class="backSection">
+          <a id="back">BACK</a>
+          <h1>TRAINS IN YOUR AREA</h1>
++        </section>
+
+        <img id="train" />
+        <button id="dislikeButton" onclick=postTrainData(false)>
+          <i class="fa fa-times" style="font-size: 56px"></i>
+        </button>
+        <button id="likeButton" onclick=postTrainData(true)>
           <i class="fa fa-heart" style="font-size: 56px; color: #ce7777"></i>
         </button>
       </section>
@@ -32,9 +47,7 @@
         <p id="dislikes"></p>
       </section>
     </main>
-    <script
-      type="text/javascript"
-      src="../resources/js/trainFinder.js"
-    ></script>
+
+
   </body>
 </html>
