@@ -8,8 +8,8 @@ async function getTrainDetails() {
   try {
     const result = await fetch("https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains/details", {
       headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${jwtToken}`,
+        "Accept": "application/json",
+        "Authorization": `Bearer ${jwtToken}`,
       },
     });
     data = await result.json();
@@ -43,8 +43,8 @@ async function getUserLikedTrains() {
   try {
     const result = await fetch("https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains/likes", {
       headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${jwtToken}`,
+        "Accept": "application/json",
+        "Authorization": `Bearer ${jwtToken}`,
       },
     });
     return await result.json();
@@ -57,7 +57,10 @@ async function postTrainData(matched) {
   try {
     const response = await fetch("https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains", {
       method: "POST",
-      headers: { Authorization: `Bearer ${jwtToken}` },
+      headers: { "Authorization": `Bearer ${jwtToken}`,
+    "Accept":"application/json",
+    "Content-Type":"application/json"
+    },
       body: JSON.stringify({
         trianDetailsId: trainSelected["trianDetailsId"],
         matched: matched,
@@ -75,12 +78,4 @@ async function postTrainData(matched) {
 }
 document.addEventListener("DOMContentLoaded", async () => {
   await getTrainDetails();
-});
-
-document.querySelector("#likeButton").addEventListener("click", async () => {
-  postTrainData(true);
-});
-
-document.querySelector("#dislikeButton").addEventListener("click", async () => {
-  postTrainData(false);
 });

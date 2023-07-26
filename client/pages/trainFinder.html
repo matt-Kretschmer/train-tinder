@@ -16,7 +16,7 @@
     />
     <script
     type="text/javascript"
-    src="../resources/js/trainFinder.js"
+    src="../scripts/trainFinder.js"
   ></script>
   </head>
   <body>
@@ -28,10 +28,10 @@
 +        </section>
 
         <img id="train" />
-        <button id="dislikeButton">
+        <button id="dislikeButton" onclick=postTrainData(false)>
           <i class="fa fa-times" style="font-size: 56px"></i>
         </button>
-        <button id="likeButton">
+        <button id="likeButton" onclick=postTrainData(true)>
           <i class="fa fa-heart" style="font-size: 56px; color: #ce7777"></i>
         </button>
       </section>
@@ -47,5 +47,7 @@
         <p id="dislikes"></p>
       </section>
     </main>
+
+
   </body>
 </html>
