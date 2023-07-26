@@ -1,0 +1,39 @@
+html {
+  width: 100vw;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  width: 100%;
+}
+
+article {
+  background-color: var(--accent);
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+h2 {
+  font-size: 4rem;
+
+}
+
+a {
+  background-color: var(--primary);
+  width: fit-content;
+  padding: 1rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  color: var(--accent);
+  font-size: 1rem;
+
+}

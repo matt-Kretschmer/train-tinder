@@ -1,66 +1,79 @@
-<head>
-    <title>Register</title>
 
-    <link rel="stylesheet" href="../resources/style/app.css"/>
-    <!-- AWS SDK for JavaScript -->
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.933.0.min.js"></script>
-
-    <!-- Amazon Cognito Identity SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/amazon-cognito-identity-js@6.3.1/dist/amazon-cognito-identity.min.js"></script>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+          charset="UTF-8"
+          lang="en"
+        />
+        <title>Register</title>
     
-    <script src="../scripts/register.js"></script>
-</head>
-<body class="primary-bg">
-    <main style="display: flex; width: 100%; height: 100%;">
-        <section class="main-section" style="height: 100%; width: 70%;">
-            <header class="main-header">
-                <h1>Train Tinder</h1>
-            </header>
-            <h2 class="sub-header secondary-text" style="display: flex; justify-content: center;">Login with socials</h2>
-            <form style="display: flex; justify-content: space-around;">
-                <input type="button" class="accent-button secondary-text" value="Sign up with Google"/>
-            </form>
-            <h2 class="sub-header secondary-text" style="display: flex; justify-content: center; margin-top: 0.5em;">OR</h2>
-            <form id="registerUserForm" onsubmit="registerUser(event)" style="
-                display: flex; 
-                flex-direction: column; 
-                align-items: center; 
-                gap: 0.5em;"
-            >
-                <input required type="text" style="font-size: 1.5em;" id="username" placeholder="username"/>
-                <input required type="email" style="font-size: 1.5em;" id="email" placeholder="email"/>
-                <input required type="password" style="font-size: 1.5em;" id="password" placeholder="password"/>
-                <input type="submit" class="accent-button secondary-text"  value="Sign up" style="margin-top: 1em;"/>
-            </form>
-            <form id="confirmRegister" onsubmit="authorizeUser(event)" style="
-                display: none; 
-                flex-direction: column; 
-                align-items: center; 
-                gap: 0.5em;"
-                
-            >
-                <input required type="auth-code" style="font-size: 1.5em;" id="auth-code" placeholder="Authorization Code"/>
-                <label for="auth-code" class="secondary-text">Please check your inbox for an authorization code</label>
-                <input type="submit" class="accent-button secondary-text"  value="Authorize" style="margin-top: 1em;"/>
-            </form>
-        </section>
-        <section class="bg-accent info-section" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2em;">
-            <h2 class="sub-header" style="display: flex; justify-content: center;">Have an account?</h2>
-            <article class="mb-lg">
-                <p style="font-size: 1.5em">Login below and find a train for you</p>
-            </article>
-            <form style="display: flex; justify-content: space-around;">
-                <input type="button" class="accent-button secondary-text" value="Login" onclick="navToLogin()"/>
-            </form>
-        </section>
-
-        <!-- Popup overlay -->
-        <div class="overlay" id="popupOverlay">
-            <!-- Popup container -->
-            <div class="popup">
-            <h2>Success!</h2>
-            <input onclick="navToLogin()" type="button" class="accent-button secondary-text" value="Go To login"/>
-            </div>
+        <link rel="stylesheet" href="../resources/style/app.css"/>
+        <!-- AWS SDK for JavaScript -->
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.933.0.min.js"></script>
+    
+        <!-- Amazon Cognito Identity SDK -->
+        <script src="https://cdn.jsdelivr.net/npm/amazon-cognito-identity-js@6.3.1/dist/amazon-cognito-identity.min.js"></script>
+        
+        <script src="../scripts/register.js"></script>
+        <script src="../scripts/global.js"></script>
+    
+    </head>
+    <body class="primary-bg">
+        <div id="loader-overlay">
+            <div id="loader"></div>
         </div>
-    </main>
-</body>
+        <main class="login-main">
+            <section class="main-section">
+                <header class="main-header">
+                    <h1>Train Tinder</h1>
+                </header>
+                <h2 class="sub-header secondary-text" style="display: flex; justify-content: center;">Login with AWS Cognito</h2>
+                <form id="registerUserForm" onsubmit="registerUser(event)" style="
+                    display: flex; 
+                    flex-direction: column; 
+                    align-items: center; 
+                    gap: 0.5em;"
+                >
+                    <input required type="text" style="font-size: 1.5em;" id="username" placeholder="username"/>
+                    <input required type="email" style="font-size: 1.5em;" id="email" placeholder="email"/>
+                    <input required type="password" style="font-size: 1.5em;" id="password" placeholder="password" onchange="validatePassword()"/>
+                    <p id="error-inline"></p>
+                    <input type="submit" class="accent-button secondary-text"  value="Sign up" style="margin-top: 1em;"/>
+                </form>
+                <form id="confirmRegister" onsubmit="authorizeUser(event)" style="
+                    display: none; 
+                    flex-direction: column; 
+                    align-items: center; 
+                    gap: 0.5em;"
+                    
+                >
+                    <input required type="auth-code" style="font-size: 1.5em;" id="auth-code" placeholder="Authorization Code"/>
+                    <label for="auth-code" class="secondary-text">Please check your inbox for an authorization code</label>
+                    <input type="submit" class="accent-button secondary-text"  value="Authorize" style="margin-top: 1em;"/>
+                </form>
+            </section>
+            <section class="bg-accent info-section" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2em;">
+                <h2 class="sub-header" style="display: flex; justify-content: center;">Have an account?</h2>
+                <article class="mb-lg">
+                    <p style="font-size: 1.5em">Login below and find a train for you</p>
+                </article>
+                <form style="display: flex; justify-content: space-around;">
+                    <input type="button" class="accent-button secondary-text" value="Login" onclick="navToLogin()"/>
+                </form>
+            </section>
+    
+            <!-- Popup overlay -->
+            <article class="overlay" id="popupOverlay">
+                <!-- Popup container -->
+                <section class="popup">
+                <h2>Success!</h2>
+                <p>You have successfully registered. You will now be redirected to the login page.</p>
+                <!-- <input onclick="navToLogin()" type="button" class="accent-button secondary-text" value="Go To login"/> -->
+                </section>
+            </article>
+        </main>
+    </body>
+</html>

@@ -9,8 +9,9 @@
     />
     <title>Train Tinder</title>
     <link rel="stylesheet" href="../resources/style/app.css" />
+    <link rel="stylesheet" href="../resources/style/loader.css" />
     <link
-      href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
       rel="stylesheet"
       type="text/css"
     />
@@ -18,21 +19,26 @@
     type="text/javascript"
     src="../scripts/trainFinder.js"
   ></script>
+  <script src="../scripts/global.js"></script>
+
   </head>
   <body>
+    <div id="loader-overlay">
+      <div id="loader"></div>
+    </div>
     <main id="train-main">
       <section class="train-profile">
         <section class="backSection">
-          <a id="back">BACK</a>
+          <a id="back" class="clickable">BACK</a>
           <h1>TRAINS IN YOUR AREA</h1>
-+        </section>
+        </section>
 
         <img id="train" />
-        <button id="dislikeButton" onclick=postTrainData(false)>
+        <button id="dislikeButton" class="clickable" onclick=postTrainData(false)>
           <i class="fa fa-times" style="font-size: 56px"></i>
         </button>
-        <button id="likeButton" onclick=postTrainData(true)>
-          <i class="fa fa-heart" style="font-size: 56px; color: #ce7777"></i>
+        <button id="likeButton" class="clickable" onclick=postTrainData(true)>
+          <i class="fa fa-heart" id="heart-icon"></i>
         </button>
       </section>
 

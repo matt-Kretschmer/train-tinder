@@ -5,6 +5,18 @@ const poolData = {
 
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
+function validatePassword(){
+    const password = document.getElementById('password').value;
+    const passwordRegex = new RegExp(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
+    const inlineError = document.getElementById('error-inline');
+    if(!passwordRegex.test(password)){
+        inlineError.innerText = "Invalid password, you need 1 uppercase, 1 lowercase, 1 special character, a number and a minimum of 8 characters."
+        setTimeout(() => {inlineError.innerText = ''}, 10000)
+    }
+
+    return passwordRegex.test(password);
+};
+
 function registerUser(event) {
     event.preventDefault();
     // togglePopup()
@@ -16,19 +28,23 @@ function registerUser(event) {
         const email = document.getElementById('email').value;
         // Add other form field values as needed
         
+        if(!validatePassword()){
+            return;
+        }
+
         const attributeList = [
             new AmazonCognitoIdentity.CognitoUserAttribute({ Name: 'email', Value: email }),
             new AmazonCognitoIdentity.CognitoUserAttribute({ Name: 'preferred_username', Value: username }),
             // Add other attributes as needed
         ];
-    
+        showLoadingAnimation();
         userPool.signUp(username, password, attributeList, null, function (err, result) {
         if (err) {
+            hideLoadingAnimation();
             console.error('Error registering user:', err.message || JSON.stringify(err));
             return;
         }else{
-
-            console.log('User registered successfully. Confirmation email sent:', result.user);
+            hideLoadingAnimation();
             document.getElementById('registerUserForm').style.display = 'none';
             document.getElementById('confirmRegister').style.display = 'flex';
         }
@@ -56,18 +72,18 @@ function authorizeUser(event){
     };
       
     const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+    showLoadingAnimation();
     cognitoUser.confirmRegistration(authCode, true, (err, result) => {
         if (err) {
+          hideLoadingAnimation();
           console.log('Confirmation error:', err.message || JSON.stringify(err));
         } else {
+            hideLoadingAnimation();
             togglePopup()
+            setTimeout(()=> {window.location.replace('https://dnhcmoxb4x8e8.cloudfront.net/')}, 5000);
         //   go to login
         }
     });
-
-    console.log(username)
-
-    // proceed to login
 
 }
 
