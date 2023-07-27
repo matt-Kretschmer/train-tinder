@@ -7,27 +7,6 @@
   <link rel="stylesheet" href="../resources/style/app.css" />
 </head>
 <body>
-<!--  <main id="liked-trains-page">-->
-<!--    <header>-->
-<!--      <button id="back-button" onclick="history.back()">Back</button>-->
-<!--      <h1>Trains You've liked</h1>-->
-<!--      <button id="settings-button" onclick="history.back()">-->
-<!--        <i class="fa fa-cog"></i>-->
-<!--      </button>-->
-<!--    </header>-->
-<!--    <span id="liked-profile">-->
-<!--      <img id="liked-train-image" src="../resources/images/train_tinder_logo.png" alt="profile image of train-name">-->
-<!--      <hr />-->
-<!--      <nav id="liked-profiles-navigation">-->
-<!--        <a href="#">-->
-<!--          <i class="fa fa-angle-left fa-5x navigation-icons"></i>-->
-<!--        </a>-->
-<!--        <a href="trainFinder.html">-->
-<!--          <i class="fa fa-angle-right fa-5x navigation-icons"></i>-->
-<!--        </a>-->
-<!--      </nav>-->
-<!--    </span>-->
-<!--  </main>-->
   <div id="loader-overlay">
     <div id="loader"></div>
   </div>
@@ -49,10 +28,10 @@
       </section>
 
       <img id="train" />
-      <button id="dislikeButton" class="clickable" onclick=postTrainData(false)>
+      <button id="previousProfile" class="clickable" onclick=previousLikedProfile()>
         <i class="fa fa-angle-left fa-5x navigation-icons" style="font-size: 56px"></i>
       </button>
-      <button id="likeButton" class="clickable" onclick=postTrainData(true)>
+      <button id="nextProfile" class="clickable" onclick=nextLikedProfile()>
         <i class="fa fa-angle-right fa-5x navigation-icons" id="heart-icon"></i>
       </button>
     </section>
