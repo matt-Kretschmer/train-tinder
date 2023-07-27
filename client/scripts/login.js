@@ -30,6 +30,7 @@ const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
         hideLoadingAnimation()
         localStorage.setItem('jwt',session.getAccessToken().getJwtToken())
         // nav just now 
+        window.location.href = './client/page/home.html'
         },
         onFailure: function (err) {
         hideLoadingAnimation()
