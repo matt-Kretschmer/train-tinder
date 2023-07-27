@@ -5,31 +5,26 @@
   <title>Liked Trains | Train Tinder</title>
   <link rel="icon" href="../resources/images/train_tinder_icon.png">
   <link rel="stylesheet" href="../resources/style/app.css" />
-  <script
-  type="text/javascript"
-  src="../scripts/likedTrains.js"
-></script>
+  <script type="text/javascript" src="../scripts/likedTrains.js"></script>
 </head>
 <body>
   <div id="loader-overlay">
     <div id="loader"></div>
   </div>
   <main id="train-liked">
-    <section class="description">
-      <h2 id="name"></h2>
+    <section class="liked-description">
+      <button id="back-button-2" onclick="history.back()">Back</button>
+      <h2 id="like-train-name">name</h2>
 
-      <h3>About</h3>
-      <p id="about"></p>
-      <h3>Likes</h3>
-      <p id="likes"></p>
-      <h3>Dislikes</h3>
-      <p id="dislikes"></p>
+      <h3 class="liked-description-headings">About:</h3>
+      <p class="liked-description-texts" id="about"></p>
+      <h3 class="liked-description-headings">Likes:</h3>
+      <p class="liked-description-texts" id="likes"></p>
+      <h3 class="liked-description-headings">Dislikes:</h3>
+      <p class="liked-description-texts" id="dislikes"></p>
     </section>
-    <section class="train-profile">
-      <section class="backSection">
-        <a  id="back" class="clickable" href="home.html">BACK</a>
-        <h1>LIKED TRAINS</h1>
-      </section>
+    <section id="liked-train-profile" class="train-profile">
+      <h1>LIKED TRAINS</h1>
 
       <img id="train" />
       <button id="previousProfile" class="clickable" onclick=previousLikedProfile()>
