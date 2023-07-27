@@ -65,6 +65,7 @@ function authorizeUser(event){
     event.preventDefault();
     const username = document.getElementById('username').value;
     const authCode = document.getElementById('auth-code').value;
+    const inlineError = document.getElementById('error-inline');
 
     const userData = {
         Username: username,
@@ -77,6 +78,7 @@ function authorizeUser(event){
         if (err) {
           hideLoadingAnimation();
           console.log('Confirmation error:', err.message || JSON.stringify(err));
+          inlineError.innerText = err.message;
         } else {
             hideLoadingAnimation();
             togglePopup()

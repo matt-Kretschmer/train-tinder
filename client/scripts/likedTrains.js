@@ -12,9 +12,16 @@ const fetchLikedTrains = async () => {
                 "Authorization": `Bearer ${jwtToken}`,
             },
         });
+
+        if(result.status === 401 ){
+            hideLoadingAnimation();
+            window.location.replace('https://dnhcmoxb4x8e8.cloudfront.net/');
+        };
+
         likedTrains = await result.json();
         hideLoadingAnimation();
         await getLikedTrainProfile();
+        
     } catch (error) {
         console.error(error);
         window.location.href('noTrains.html');
