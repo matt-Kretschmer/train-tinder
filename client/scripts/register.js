@@ -88,5 +88,5 @@ function authorizeUser(event){
 }
 
 function navToLogin(){
-    window.location.href = "login.html"
+    window.location.href = "../../login.html"
 }
