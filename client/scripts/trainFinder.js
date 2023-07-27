@@ -83,7 +83,7 @@ async function postTrainData(matched) {
     "Content-Type":"application/json"
     },
       body: JSON.stringify({
-        trianDetailsId: trainSelected["trianDetailsId"],
+        trainDetailsId: trainSelected["trianDetailsId"],
         matched: matched,
       }),
     });

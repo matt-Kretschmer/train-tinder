@@ -28,7 +28,8 @@ const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
     cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function (session) {
         hideLoadingAnimation()
-        localStorage.setItem('jwt',session.getAccessToken().getJwtToken())
+        localStorage.setItem('jwt',session.getAccessToken().getJwtToken());
+        navToHome();
         // nav just now 
         },
         onFailure: function (err) {
@@ -64,7 +65,7 @@ function authorizeUser(event){
 }
 
 function navToHome(){
-    window.location.href = "./client/pages/register.html"
+    window.location.href = "./client/pages/home.html"
 }
 
 function navToRegister(){
