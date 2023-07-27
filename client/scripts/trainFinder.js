@@ -1,4 +1,4 @@
-const jwtToken = localStorage.getItem("jwt");
+const jwtToken = sessionStorage.getItem("jwt");
 let data, trainSelected;
 let likedTrains = [];
 

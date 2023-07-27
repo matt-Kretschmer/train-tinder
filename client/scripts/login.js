@@ -28,9 +28,8 @@ const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
     cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function (session) {
         hideLoadingAnimation()
-        localStorage.setItem('jwt',session.getAccessToken().getJwtToken());
+        sessionStorage.setItem('jwt',session.getAccessToken().getJwtToken())
         navToHome();
-        // nav just now 
         },
         onFailure: function (err) {
         hideLoadingAnimation()

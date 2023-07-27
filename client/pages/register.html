@@ -41,7 +41,7 @@
                     <input required type="email" style="font-size: 1.5em;" id="email" placeholder="email"/>
                     <input required type="password" style="font-size: 1.5em;" id="password" placeholder="password" onchange="validatePassword()"/>
                     <p id="error-inline"></p>
-                    <input type="submit" class="accent-button secondary-text"  value="Sign up" style="margin-top: 1em;"/>
+                    <input type="submit" class="accent-button secondary-text clickable"  value="Sign up" style="margin-top: 1em;"/>
                 </form>
                 <form id="confirmRegister" onsubmit="authorizeUser(event)" style="
                     display: none; 
@@ -52,7 +52,7 @@
                 >
                     <input required type="auth-code" style="font-size: 1.5em;" id="auth-code" placeholder="Authorization Code"/>
                     <label for="auth-code" class="secondary-text">Please check your inbox for an authorization code</label>
-                    <input type="submit" class="accent-button secondary-text"  value="Authorize" style="margin-top: 1em;"/>
+                    <input type="submit" class="accent-button secondary-text clickable"  value="Authorize" style="margin-top: 1em;"/>
                 </form>
             </section>
             <section class="bg-accent info-section" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2em;">
@@ -61,7 +61,7 @@
                     <p style="font-size: 1.5em">Login below and find a train for you</p>
                 </article>
                 <form style="display: flex; justify-content: space-around;">
-                    <input type="button" class="accent-button secondary-text" value="Login" onclick="navToLogin()"/>
+                    <input type="button" class="accent-button secondary-text clickable" value="Login" onclick="navToLogin()"/>
                 </form>
             </section>
     
@@ -71,7 +71,6 @@
                 <section class="popup">
                 <h2>Success!</h2>
                 <p>You have successfully registered. You will now be redirected to the login page.</p>
-                <!-- <input onclick="navToLogin()" type="button" class="accent-button secondary-text" value="Go To login"/> -->
                 </section>
             </article>
         </main>
