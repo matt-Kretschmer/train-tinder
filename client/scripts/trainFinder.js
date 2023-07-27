@@ -40,7 +40,7 @@ async function getTrainDetails() {
       }
       hideLoadingAnimation();
     } else {
-      alert("no trains"); //to redirect to page maybe
+      window.location.href('noTrains.html');
     }
   } catch (error) {
     hideLoadingAnimation();
