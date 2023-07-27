@@ -40,7 +40,8 @@ async function getTrainDetails() {
       }
       hideLoadingAnimation();
     } else {
-      alert("no trains"); //to redirect to page maybe
+      hideLoadingAnimation()
+      window.location.href = 'noTrains.html';
     }
   } catch (error) {
     hideLoadingAnimation();
@@ -83,7 +84,7 @@ async function postTrainData(matched) {
     "Content-Type":"application/json"
     },
       body: JSON.stringify({
-        trianDetailsId: trainSelected["trianDetailsId"],
+        trainDetailsId: trainSelected["trianDetailsId"],
         matched: matched,
       }),
     });
