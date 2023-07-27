@@ -5,6 +5,7 @@ let likedTrains = [];
 async function getTrainDetails() {
   likedTrains = await getUserLikedTrains();
 
+  showLoadingAnimation();
   try {
     const result = await fetch("https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains/details", {
       headers: {
@@ -12,7 +13,13 @@ async function getTrainDetails() {
         "Authorization": `Bearer ${jwtToken}`,
       },
     });
+
+    if(result.status === 401){
+      window.location.replace('https://dnhcmoxb4x8e8.cloudfront.net/');
+    }
+
     data = await result.json();
+
     let availableTrains = data.filter(
       (allTrains) =>
         !likedTrains.some((userTrains) => allTrains.name === userTrains.name)
@@ -31,30 +38,44 @@ async function getTrainDetails() {
           }
         }
       }
+      hideLoadingAnimation();
     } else {
       alert("no trains"); //to redirect to page maybe
     }
   } catch (error) {
+    hideLoadingAnimation();
     console.error(error);
+    window.location.href = 'error.html';
+
   }
 }
 
 async function getUserLikedTrains() {
   try {
+    showLoadingAnimation();
     const result = await fetch("https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains/likes", {
       headers: {
         "Accept": "application/json",
         "Authorization": `Bearer ${jwtToken}`,
       },
     });
+
+    if(result.status === 401){
+      hideLoadingAnimation();
+      window.location.replace('https://dnhcmoxb4x8e8.cloudfront.net/');
+    }
+
+    hideLoadingAnimation();
     return await result.json();
   } catch (error) {
-    console.error(error);
+    hideLoadingAnimation();
+    window.location.href = 'error.html' ;
   }
 }
 
 async function postTrainData(matched) {
   try {
+    showLoadingAnimation();
     const response = await fetch("https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains", {
       method: "POST",
       headers: { "Authorization": `Bearer ${jwtToken}`,
@@ -67,15 +88,26 @@ async function postTrainData(matched) {
       }),
     });
 
+    if(response.status === 401){
+      hideLoadingAnimation();
+      window.location.replace('https://dnhcmoxb4x8e8.cloudfront.net/');
+    }
+
     if (!response.ok) {
+      hideLoadingAnimation();
       throw new Error("Failed response");
     }
 
-    await getTrainDetails();
+    hideLoadingAnimation();
+    getTrainDetails();
   } catch (error) {
+    hideLoadingAnimation();
     console.error(error);
+    window.location.href ='error.html';
+
   }
 }
+
 document.addEventListener("DOMContentLoaded", async () => {
   await getTrainDetails();
 });
