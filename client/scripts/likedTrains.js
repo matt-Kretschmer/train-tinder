@@ -42,7 +42,7 @@ const getLikedTrainProfile = async () => {
     document.getElementById('train').src = currentProfile.imageUrl;
 
     // Details section
-    document.getElementById('name').innerText = currentProfile.name;
+    document.getElementById('like-train-name').innerText = currentProfile.name;
     document.getElementById('about').innerText = currentProfile.about;
     document.getElementById('likes').innerText = currentProfile.likes;
     document.getElementById('dislikes').innerText = currentProfile.dislikes;
