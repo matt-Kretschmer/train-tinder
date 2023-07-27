@@ -3,7 +3,9 @@ let currentTrainIndex = 0;
 let likedTrains = [];
 
 const fetchLikedTrains = async () => {
+    
     try {
+        showLoadingAnimation();
         const result = await fetch("https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains/likes", {
             headers: {
                 "Accept": "application/json",
@@ -11,6 +13,7 @@ const fetchLikedTrains = async () => {
             },
         });
         likedTrains = await result.json();
+        hideLoadingAnimation();
         await getLikedTrainProfile();
     } catch (error) {
         console.error(error);
