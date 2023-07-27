@@ -5,8 +5,8 @@ let likedTrains = [];
 async function getTrainDetails() {
   likedTrains = await getUserLikedTrains();
 
-  showLoadingAnimation();
   try {
+    showLoadingAnimation();
     const result = await fetch("https://iy5c8q37pq.eu-west-1.awsapprunner.com/trains/details", {
       headers: {
         "Accept": "application/json",
@@ -15,6 +15,7 @@ async function getTrainDetails() {
     });
 
     if(result.status === 401){
+      hideLoadingAnimation();
       window.location.replace('https://dnhcmoxb4x8e8.cloudfront.net/');
     }
 
@@ -45,9 +46,7 @@ async function getTrainDetails() {
     }
   } catch (error) {
     hideLoadingAnimation();
-    console.error(error);
     window.location.href = 'error.html';
-
   }
 }
 
@@ -64,11 +63,13 @@ async function getUserLikedTrains() {
     if(result.status === 401){
       hideLoadingAnimation();
       window.location.replace('https://dnhcmoxb4x8e8.cloudfront.net/');
+      return {};
+    }else{
+      hideLoadingAnimation();
+      return await result.json();
     }
-
-    hideLoadingAnimation();
-    return await result.json();
   } catch (error) {
+    console.log(error)
     hideLoadingAnimation();
     window.location.href = 'error.html' ;
   }
@@ -94,18 +95,12 @@ async function postTrainData(matched) {
       window.location.replace('https://dnhcmoxb4x8e8.cloudfront.net/');
     }
 
-    if (!response.ok) {
-      hideLoadingAnimation();
-      throw new Error("Failed response");
-    }
-
     hideLoadingAnimation();
     getTrainDetails();
   } catch (error) {
     hideLoadingAnimation();
     console.error(error);
     window.location.href ='error.html';
-
   }
 }
 
